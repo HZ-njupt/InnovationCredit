@@ -29,30 +29,30 @@
     <div class="part2" v-if="!showset">
         <div class="card">
           <h2>Competition<i class="el-icon-trophy" style="color:#0076d1"></i></h2>
-          <span>0</span>
+          <span>{{$store.state.c_amount.amount}}</span>
           <h2>Credit</h2>
-          <span>0</span>
+          <span>{{$store.state.c_amount.credit}}</span>
           <h4>Look forward to your participation</h4>
         </div>
         <div class="card">
             <h2>Paper<i class="el-icon-copy-document" style="color:#0076d1"></i></h2>
-          <span>0</span>
+          <span>{{$store.state.p_amount.amount}}</span>
           <h2>Credit</h2>
-          <span>0</span>
+          <span>{{$store.state.p_amount.credit}}</span>
           <h4>Look forward to your participation</h4>
         </div>
         <div class="card">
             <h2>Patent<i class="el-icon-collection" style="color:#0076d1"></i></h2>
-          <span>0</span>
+          <span>{{$store.state.t_amount.amount}}</span>
           <h2>Credit</h2>
-          <span>0</span>
+          <span>{{$store.state.t_amount.credit}}</span>
           <h4>Look forward to your participation</h4>
         </div>
         <div class="card">
             <h2>Waiting for Review</h2>
-            <span>0</span>
+            <span>{{$store.state.w_amount.amount}}</span>
             <h2>Credit</h2>
-            <span>0</span>
+            <span>{{$store.state.w_amount.credit}}</span>
             <h4>Look forward to your participation</h4>
         </div>
     </div>

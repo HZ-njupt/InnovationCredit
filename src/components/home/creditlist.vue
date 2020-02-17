@@ -1,24 +1,24 @@
 <template>
    <div>
     <div style="background-color:white;text-align:right">
-      <h2 style="float:left;margin-left:10px;">{{keyword}} List</h2>
+      <h2 style="float:left;margin-left:10px;">{{$store.state.kindoflist}} List</h2>
      <el-button type="primary" @click="manageit()" class="managebtn"><i class="el-icon-setting"></i>Manage</el-button>
       <el-button type="primary" :loading="loadclass" @click="manageclass()" class="managebtn"><i class="el-icon-setting"></i>Class Manage</el-button>
     </div> 
-      <el-table row-key="id" ref="multipleTable" :data="tableData" tooltip-effect="dark" @selection-change="handleSelectionChange" stripe>
+      <el-table row-key="id" ref="multipleTable" :data="$store.state.List" tooltip-effect="dark" @selection-change="handleSelectionChange" stripe>
        <el-table-column type="index" width="60">
        </el-table-column>
        <el-table-column type="selection" width="50" v-if="manage">
        </el-table-column>
-        <el-table-column prop="number" label="学号" width="150">
+        <el-table-column prop="number" label="Number" width="150">
         </el-table-column>
-        <el-table-column prop="name" label="姓名" width="110">
+        <el-table-column prop="name" label="Name" width="110">
         </el-table-column>
-        <el-table-column prop="competition" :label="keyword" width="450">
+        <el-table-column prop="competition" :label="$store.state.kindoflist" width="400">
         </el-table-column>
-        <el-table-column prop="credit" label="所获创新学分" width="200">
+        <el-table-column prop="credit" label="Credit" width="200">
         </el-table-column>
-        <el-table-column label="审核状态">
+        <el-table-column prop="audit" label="AuditStatus">
         </el-table-column>
         <el-table-column width="200">
           <template slot-scope="scope">
@@ -27,7 +27,6 @@
           </template>
         </el-table-column>
       </el-table>
-     
      
      
       <div class="btn-group" v-if="manage">
@@ -43,7 +42,7 @@
          <el-form-item label="Number:" prop="editnumber">
          <el-input type="text" v-model="editForm.editnumber" autocomplete="off" clearable></el-input>
          </el-form-item>
-         <el-form-item :label="keyword+':'" prop="editobject">
+         <el-form-item :label="$store.state.kindoflist+':'" prop="editobject">
          <el-input type="text" v-model="editForm.editobject" autocomplete="off" clearable></el-input>
          </el-form-item>
          <el-form-item label="Credit:" prop="editcredit">
@@ -55,7 +54,7 @@
          </el-form-item>
          </el-form>
        </el-dialog>
-      
+       <!-- 编辑对话框 -->
       
       </div>
 </template>
@@ -89,7 +88,7 @@
 <script>
 import Ktbutton from './Ktbutton'
    export default {
-     props:['content','keyword'],
+     props:['keyword'],
       name:'creditlist',
       components: {
      'kt-button': Ktbutton
