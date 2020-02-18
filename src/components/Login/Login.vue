@@ -62,10 +62,10 @@
         },
         fieldRules: {
           account: [
-            { required: true, message: '请输入账号', trigger: 'blur' },
+            { required: true, message: 'please input number', trigger: 'blur' },
           ],
           password: [
-            { required: true, message: '请输入密码', trigger: 'blur' },
+            { required: true, message: 'please input password', trigger: 'blur' },
           ]
         },
         checked: true
@@ -73,15 +73,21 @@
     },
     methods: {
       login() {
-          let userInfo={account:this.loginForm.account, password:this.loginForm.password}
-          this.$api.login(JSON.stringify(userInfo)).then((res)=> {
-　　　　　　　alert(res.data.token)
-            Cookies.set('token', res.data.token) // 放置token到Cookie 
-            sessionStorage.setItem('user', userInfo.account)
-            this.$router.push('/home')  // 登录成功，跳转到主页
-          }).catch(function(res) {
-            alert(res);
-          });
+          let userInfo={'account':this.loginForm.account, 'password':this.loginForm.password}
+//           this.$api.login(JSON.stringify(userInfo)).then((res)=> {
+// 　　　　　　　alert(res.data.token)
+//             Cookies.set('token', res.data.token) // 放置token到Cookie 
+//             sessionStorage.setItem('user', userInfo.account)
+//             this.$router.push('/home')  // 登录成功，跳转到主页
+//           }).catch(function(res) {
+//             alert(res);
+//           });
+          this.$store.dispatch('Login', userInfo)
+          .then(() => {this.$router.push({ path: '/home' });
+          })
+          .catch((error) => {
+            console.log(error.response); 
+           });
           
       },
       reset(){

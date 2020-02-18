@@ -16,9 +16,7 @@
 </el-menu>
 
 <div class="list">
- <el-collapse-transition>
 <creditlist v-if="$store.state.showlist" ></creditlist>
- </el-collapse-transition>
 <homepage  v-if="$store.state.showhome"></homepage>
 </div>
 
@@ -46,6 +44,7 @@
     width:90%;
     margin:100px auto;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    
   }
 </style>
 

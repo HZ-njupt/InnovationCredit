@@ -4,7 +4,9 @@
     <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect"
     background-color="#545c64" text-color="white" active-text-color="#ffd04b">
    <el-menu-item index="1" @click="$router.go(-1)"><i class="el-icon-s-home"></i>Back to Home</el-menu-item>
-   <el-menu-item index="2" style="float:right" @click="setting()"><i class="el-icon-setting"></i>{{Setting}}</el-menu-item>
+   <el-menu-item index="2" style="float:right" @click="$store.dispatch('LogOut()')">Log Out</el-menu-item>
+   <el-menu-item index="3" style="float:right" @click="setting()"><i class="el-icon-setting"></i>{{Setting}}</el-menu-item>
+    
   </el-menu>
   
     <div class="part1">
@@ -72,7 +74,7 @@
     text-align: center;
     border-radius: 50%;
     background-color: #545c64;
-    margin-left: 8vw;
+    margin-left: 10vw;
     margin-top: 5vh;
     color: white;
     position: relative;
@@ -84,8 +86,10 @@
     width: 100%;
     margin: 0 auto;
     background-color: rgb(250, 250, 250);
+    //background-color: rgba(168, 208, 245, 0.404);
     padding-bottom: 5vh;
-    box-shadow: 0 10px 40px -8px rgba(0,0,0,.2);
+    //box-shadow: 0 10px 40px -8px rgba(0,0,0,.2);
+    box-shadow: 0 10px 40px -8px rgba(43, 62, 102, 0.308);
     display:flex;
     flex-direction: row;
    }

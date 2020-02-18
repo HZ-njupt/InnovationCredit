@@ -5,7 +5,7 @@
       <span>Real Name: </span><el-input type="text" v-model="SignForm.name" auto-complete="off" placeholder="Name" clearable></el-input>
     </el-form-item>
     <el-form-item prop="number">
-      <span>Number: </span><el-input type="text" v-model="SignForm.account" auto-complete="off" placeholder="Number" clearable></el-input>
+      <span>Number: </span><el-input type="text" v-model="SignForm.number" auto-complete="off" placeholder="Number" clearable></el-input>
     </el-form-item>
     <el-form-item prop="email">
       <span>Email: </span><el-input type="text" v-model="SignForm.email" auto-complete="off" placeholder="Email" clearable></el-input>
@@ -62,6 +62,13 @@
   export default {
     name: 'Signin',
     data() {
+      var validatePass2 = (rule, value, callback) => {
+        if (this.SignForm.password !== value) {
+          callback(new Error('两次输入密码不一致!'));
+        } else {
+          callback();
+        }
+      };
       return {
         logining: false,
         SignForm: {
@@ -79,7 +86,7 @@
             { required: true, message: 'please input password', trigger: 'blur' },
           ],
           verpass: [
-            { required: true, message: 'please input password again', trigger: 'blur' },
+            { required: true,validator:validatePass2, message: 'please verify password again', trigger: 'blur' },
           ],
           email: [
             { required: true, message: 'please input email', trigger: 'blur' },
@@ -93,16 +100,22 @@
     },
     methods: {
       login() {
-          let userInfo={account:this.SignForm.number, password:this.SignForm.password}
-          this.$api.login(JSON.stringify(userInfo)).then((res)=> {
-// 　　　　　　　alert(res.data.token)
-            // Cookies.set('token', res.data.token) // 放置token到Cookie 
-            // sessionStorage.setItem('user', userInfo.account)
-            this.$router.push('/home')  // 注册成功，跳转到主页
-          }).catch(function(res) {
-            alert(res);
-          });
-          
+          let userInfo=this.SignForm;
+//           this.$api.login(JSON.stringify(userInfo)).then((res)=> {
+// // 　　　　　　　alert(res.data.token)
+//             // Cookies.set('token', res.data.token) // 放置token到Cookie 
+//             // sessionStorage.setItem('user', userInfo.account)
+//             this.$router.push('/home')  // 注册成功，跳转到主页
+//           }).catch(function(res) {
+//             alert(res);
+//           });
+       this.$store.dispatch('Signin', userInfo)
+         .then(() => {this.$router.push({ path: '/home' });
+          })
+          .catch((error) => {
+            console.log(error.response); 
+           });
+           
       },
      
     }
