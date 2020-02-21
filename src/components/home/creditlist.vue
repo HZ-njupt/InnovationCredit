@@ -49,8 +49,8 @@
          <el-input type="text" v-model="editForm.editcredit" autocomplete="off" clearable></el-input>
          </el-form-item>
          <el-form-item>
-         <el-button type="primary" @click="submitForm('passwordForm')">提交</el-button>
-         <el-button @click="resetForm('passwordForm')">重置</el-button>
+         <el-button type="primary" @click="submitForm('editForm')">Submit</el-button>
+         <el-button @click="resetForm('editForm')">Reset</el-button>
          </el-form-item>
          </el-form>
        </el-dialog>
@@ -62,6 +62,7 @@
 
 <style lang='scss'>
 .el-dialog{
+ 
       .el-form-item{
         text-align: left;
         width: 80%;
@@ -117,6 +118,18 @@ import Ktbutton from './Ktbutton'
       },
     deletelist(index,row){
       console.log(index, row);
+      this.$confirm('Are you sure to delete the record?', 'Attention', {
+          confirmButtonText: 'Yes',
+          cancelButtonText: 'Cancle',
+          type: 'warning',
+          center: true
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: 'Delete it!'
+          });
+        }).catch(() => {
+        });
     },
     editlist(index,row){
       this.editvisible=true;
@@ -125,12 +138,7 @@ import Ktbutton from './Ktbutton'
       this.$set(this.editForm,'editobject',row.competition)
       this.$set(this.editForm,'editcredit',row.credit)
     },
-    cancle(){
-      this.editvisible=false;
-    },
-    save(){
-
-    },
+    
     addStudent(){
       this.editvisible=true;
       this.$set(this.editForm,'editnumber','')
@@ -140,7 +148,26 @@ import Ktbutton from './Ktbutton'
     },
     
     delelteAll(){
-
+      if(this.multipleSelection.length != 0){
+       this.$confirm('Are you sure to delete these records?', 'Attention', {
+          confirmButtonText: 'Yes',
+          cancelButtonText: 'Cancle',
+          type: 'warning',
+          center: true
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: 'Delete it!'
+          });
+        }).catch(() => {
+        });
+      }else{
+         this.$message({
+            showClose: true,
+            message: "You didn't choose any information",
+            type: 'warning' 
+        })
+      }
     },
     manageit(){
          if(this.manage){
@@ -161,12 +188,18 @@ import Ktbutton from './Ktbutton'
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            this.$message({
+            showClose: true,
+            message: 'Information Saved',
+            type: 'success' 
+        })
           } else {
             console.log('error submit!!');
             return false;
           }
         });
+         this.editvisible = false;
+        
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();

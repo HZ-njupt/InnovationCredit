@@ -51,7 +51,6 @@ export default new vuex.Store ({
                 })
                }else if(item.type=='paper'){
                 state.PaperList.push(item.detail);
-                console.log(state.PaperList[0])
                 state.PaperList[0].map(function(item1){
                   if(item1.audit=='通过审核'){
                           state.p_amount.amount++;

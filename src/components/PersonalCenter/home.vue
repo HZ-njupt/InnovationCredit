@@ -6,26 +6,26 @@
    <el-menu-item index="1" @click="$router.go(-1)"><i class="el-icon-s-home"></i>Back to Home</el-menu-item>
    <el-menu-item index="2" style="float:right" @click="$store.dispatch('LogOut()')">Log Out</el-menu-item>
    <el-menu-item index="3" style="float:right" @click="setting()"><i class="el-icon-setting"></i>{{Setting}}</el-menu-item>
-    
   </el-menu>
-  
     <div class="part1">
      <div class="iconhead">
        <i class="el-icon-s-custom"></i>
      </div>
-     <!-- <div class="iconhead2">
-       <i class="el-icon-school"></i>
-     </div> -->
      <div class="message">
-         <span>Name</span>
-         <span>Academy</span>
-         <span>Number</span>
+         <div>
+         <span class="title">HZhuo</span>
+         <span class="title">|</span>
+         <span class="title">B18031007</span>
+         </div>
+         <span class="title title2">Academy:School of Computing</span>
+         <span class="title title2">Major:Infromation Security</span>
      </div>
      <div class="message">
-         <span>Major</span>
-         <span>E-mail</span>
-         <span style="color:#0076d1;cursor: pointer;"><u>View class information</u></span>
+         
+         <span>E-mail:1553780451@qq.com</span> 
+         <span style="color:#0076d1;cursor: pointer"><u>View class information</u></span>
      </div>
+     
     </div>
     <el-collapse-transition>
     <div class="part2" v-if="!showset">
@@ -73,7 +73,7 @@
     font-size: 100px;
     text-align: center;
     border-radius: 50%;
-    background-color: #545c64;
+    background-color: #635464;
     margin-left: 10vw;
     margin-top: 5vh;
     color: white;
@@ -125,12 +125,27 @@
        flex-direction: column;
    }
    .message{
+       display: flex;
+       flex-direction: column;
        margin-top: 6vh;
        margin-left: 2vw;
        span{
            display: block;
-           margin:15px;
+           margin:8px;
            text-align: left;
+       }
+       div{
+           display: flex;
+           flex-direction: row;
+       }
+       .title{
+           font-size: 28px;
+           font-weight: 600;
+           color: #0076d1
+       }
+       .title2{
+           font-size: 20px;
+           color:#635464
        }
    }
    

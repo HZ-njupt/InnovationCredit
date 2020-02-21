@@ -103,7 +103,11 @@ export default {
        var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('new password'));
-        } else {
+        } 
+        else if (value.length <= 6){
+          callback(new Error('The new password must not be less than six digits'));
+        }
+        else {
           if (this.passwordForm.checkPass !== '') {
             this.$refs.passwordForm.validateField('checkPass');
           }
@@ -115,7 +119,11 @@ export default {
           callback(new Error('new password again'));
         } else if (value !== this.passwordForm.pass) {
           callback(new Error('两次输入密码不一致!'));
-        } else {
+        } 
+        else if (value.length <= 6){
+          callback(new Error('The new password must not be less than six digits'));
+        }
+        else {
           callback();
         }
       };
@@ -163,12 +171,17 @@ export default {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            this.$message({
+            showClose: true,
+            message: 'Information Saved',
+            type: 'success' ,
+            })
           } else {
             console.log('error submit!!');
             return false;
           }
         });
+        this.$refs[formName].resetFields();
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
